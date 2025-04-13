@@ -11,7 +11,7 @@ export default function LoginPage() {
 
   const handleLogin = () => {
     if (!hasErroredOnce) {
-      if (username === "shrikant" && password === "shrikant@123") {
+      if (username.toLowerCase() === "shrikant" && password.toLowerCase() === "shrikant@123") {
         router.push("/payroll-generator");
       } else {
         setError(true);
