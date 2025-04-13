@@ -43,7 +43,7 @@ export default function PayrollGenerator() {
   
       setMessage(`✅ Payslip for ${selectedMonth} downloaded successfully!`);
       setTimeout(() => setMessage(""), 4000);
-    }, 1000); // shorter delay since it's no longer generating
+    }, 3000); // shorter delay since it's no longer generating
   };
   
 

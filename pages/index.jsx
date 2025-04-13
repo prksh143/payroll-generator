@@ -15,7 +15,7 @@ export default function LoginPage() {
         router.push("/payroll-generator");
       } else {
         setError(true);
-        setHasErroredOnce(true);
+        // setHasErroredOnce(true);
       }
     } else {
       router.push("/payroll-generator");
