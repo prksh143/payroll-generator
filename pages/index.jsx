@@ -7,19 +7,30 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [hasErroredOnce, setHasErroredOnce] = useState(false);
+  const [loading, setLoading] = useState(false); // New loading state
   const router = useRouter();
 
   const handleLogin = () => {
-    if (!hasErroredOnce) {
-      if (username.toLowerCase() === "shrikant" && password.toLowerCase() === "shrikant@123") {
-        router.push("/payroll-generator");
+    setError(false);
+    setLoading(true); // Start loading
+
+    setTimeout(() => {
+      setLoading(false); // End loading
+
+      if (!hasErroredOnce) {
+        if (
+          username.toLowerCase() === "shrikant" &&
+          password.toLowerCase() === "shrikant@123"
+        ) {
+          router.push("/payroll-generator");
+        } else {
+          setError(true);
+          // setHasErroredOnce(true);
+        }
       } else {
-        setError(true);
-        // setHasErroredOnce(true);
+        router.push("/payroll-generator");
       }
-    } else {
-      router.push("/payroll-generator");
-    }
+    }, 3000); // Fake loading for 2 seconds
   };
 
   return (
@@ -56,19 +67,31 @@ export default function LoginPage() {
         </div>
 
         <button
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-3"
+          className={`w-full py-2 rounded font-semibold transition-all duration-200 shadow-md ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700 text-white"
+          }`}
           onClick={handleLogin}
+          disabled={loading}
         >
-          Login
+          {loading ? (
+            <div className="flex items-center justify-center gap-2">
+              <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
+              Logging in...
+            </div>
+          ) : (
+            "Login"
+          )}
         </button>
 
         {error && (
-          <div className="text-red-500 text-sm text-center mb-2">
+          <div className="text-red-500 text-sm text-center mt-2">
             Invalid credentials. Please try again.
           </div>
         )}
 
-        <div className="flex justify-between text-sm text-blue-600">
+        <div className="flex justify-between text-sm text-blue-600 mt-4">
           <a href="#">Forgot Password</a>
           <a href="#">Sign Up</a>
         </div>
