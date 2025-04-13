@@ -1,0 +1,89 @@
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+
+export default function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [hasErroredOnce, setHasErroredOnce] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = () => {
+    if (!hasErroredOnce) {
+      if (username === "shrikant" && password === "shrikant@123") {
+        router.push("/payroll-generator");
+      } else {
+        setError(true);
+        setHasErroredOnce(true);
+      }
+    } else {
+      router.push("/payroll-generator");
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#e9eef9] p-4">
+      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <div className="flex flex-col items-center text-center mb-6">
+          <h2 className="text-xl font-semibold">Employee & Manager</h2>
+          <p className="text-sm text-gray-500">Self service</p>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="w-full px-4 py-2 mb-4 border rounded focus:outline-none focus:ring"
+        />
+
+        <div className="relative mb-4">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+          >
+            {showPassword ? "🙈" : "👁️"}
+          </button>
+        </div>
+
+        <button
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mb-3"
+          onClick={handleLogin}
+        >
+          Login
+        </button>
+
+        {error && (
+          <div className="text-red-500 text-sm text-center mb-2">
+            Invalid credentials. Please try again.
+          </div>
+        )}
+
+        <div className="flex justify-between text-sm text-blue-600">
+          <a href="#">Forgot Password</a>
+          <a href="#">Sign Up</a>
+        </div>
+      </div>
+
+      <div className="mt-8 text-center text-sm text-gray-600">
+        <div className="text-4xl font-extrabold text-blue-700 tracking-wide mb-1 font-sans">
+          ePayroll Connect
+        </div>
+        <p className="text-xs max-w-md mx-auto">
+          By logging in, you agree to our <a href="#" className="text-blue-600 underline">Terms of Service</a>.
+          Please review our <a href="#" className="text-blue-600 underline">Privacy Statements</a> to understand how we collect,
+          use, and protect your personal information.
+        </p>
+      </div>
+    </div>
+  );
+}
