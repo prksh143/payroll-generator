@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function PayrollGenerator() {
   const [months, setMonths] = useState([]);
@@ -11,8 +12,15 @@ export default function PayrollGenerator() {
     const temp = [];
 
     for (let i = 1; i <= 6; i++) {
-      const date = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
-      const monthYear = date.toLocaleString("default", { month: "long", year: "numeric" });
+      const date = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() - i,
+        1
+      );
+      const monthYear = date.toLocaleString("default", {
+        month: "long",
+        year: "numeric",
+      });
       temp.push(monthYear);
     }
 
@@ -23,37 +31,44 @@ export default function PayrollGenerator() {
   const handleGenerate = () => {
     setLoading(true);
     setMessage("");
-  
+
     setTimeout(() => {
       setLoading(false);
-  
+
       const formattedMonth = selectedMonth
         .toLowerCase()
         .split(" ")
         .map((word, i) => (i === 0 ? word.slice(0, 3) : word)) // "March 2025" → ["mar", "2025"]
         .join("-"); // → "mar-2025"
-  
+
       const fileName = `${formattedMonth}.pdf`;
       const filePath = `/payrolls/${fileName}`;
-  
+
       const link = document.createElement("a");
       link.href = filePath;
       link.download = fileName;
       link.click();
-  
+
       setMessage(`✅ Payslip for ${selectedMonth} downloaded successfully!`);
       setTimeout(() => setMessage(""), 4000);
-    }, 5000); 
+    }, 5000);
   };
-  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-indigo-200 p-4">
-      <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md text-center">
+      <div className=" bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md text-center">
+        <div className="flex justify-center mb-4">
+          <Image src="/icons/logo.png" alt="Logo" width={100} height={100} />
+        </div>
         <h1 className="text-2xl font-bold text-gray-800 mb-6">Payroll Desk</h1>
-        <h2 className="text-gray-800 mb-12">Please select the month for which you need the Payslip Statement</h2>
+        <h2 className="text-gray-800 mb-12">
+          Please select the month for which you need the Payslip Statement
+        </h2>
 
-        <label htmlFor="month-select" className="block text-sm font-medium text-gray-600 mb-2 text-left">
+        <label
+          htmlFor="month-select"
+          className="block text-sm font-medium text-gray-600 mb-2 text-left"
+        >
           Select Month:
         </label>
 

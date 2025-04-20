@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function LoginPage() {
@@ -28,7 +29,7 @@ export default function LoginPage() {
       } else {
         router.push("/payroll-generator");
       }
-      
+
       setLoading(false); // End loading
     }, 2000); // Fake loading for 2 seconds
   };
@@ -37,6 +38,13 @@ export default function LoginPage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#e9eef9] p-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
         <div className="flex flex-col items-center text-center mb-6">
+          <Image
+            src="/icons/logo.png"
+            alt="Logo"
+            width={100} // adjust size as needed
+            height={100}
+            className="mb-4"
+          />
           <h2 className="text-xl font-semibold">Employee & Manager</h2>
           <p className="text-sm text-gray-500">Self service</p>
         </div>
@@ -102,9 +110,16 @@ export default function LoginPage() {
           ePayroll Connect
         </div>
         <p className="text-xs max-w-md mx-auto">
-          By logging in, you agree to our <a href="#" className="text-blue-600 underline">Terms of Service</a>.
-          Please review our <a href="#" className="text-blue-600 underline">Privacy Statements</a> to understand how we collect,
-          use, and protect your personal information.
+          By logging in, you agree to our{" "}
+          <a href="#" className="text-blue-600 underline">
+            Terms of Service
+          </a>
+          . Please review our{" "}
+          <a href="#" className="text-blue-600 underline">
+            Privacy Statements
+          </a>{" "}
+          to understand how we collect, use, and protect your personal
+          information.
         </p>
       </div>
     </div>
