@@ -15,8 +15,6 @@ export default function LoginPage() {
     setLoading(true); // Start loading
 
     setTimeout(() => {
-      setLoading(false); // End loading
-
       if (!hasErroredOnce) {
         if (
           username.toLowerCase() === "shrikant" &&
@@ -30,7 +28,9 @@ export default function LoginPage() {
       } else {
         router.push("/payroll-generator");
       }
-    }, 3000); // Fake loading for 2 seconds
+      
+      setLoading(false); // End loading
+    }, 2000); // Fake loading for 2 seconds
   };
 
   return (
