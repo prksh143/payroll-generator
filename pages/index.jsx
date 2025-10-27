@@ -18,8 +18,8 @@ export default function LoginPage() {
     setTimeout(() => {
       if (!hasErroredOnce) {
         if (
-          username.toLowerCase() === "shrikant" &&
-          password.toLowerCase() === "shrikant@123"
+          username.toLowerCase() === "shrikantkumar4565" &&
+          password.toLowerCase() === "$Shrikant@123"
         ) {
           router.push("/payroll-generator");
         } else {
